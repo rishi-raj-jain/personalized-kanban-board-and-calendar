@@ -37,7 +37,6 @@ export default Page
 
 export async function getServerSideProps() {
   const providers = await getProviders()
-  console.log(JSON.stringify(providers))
   return {
     props: {
       providers,
