@@ -1,5 +1,5 @@
 {
-  "name": "ai-impart-personal-digital-assistant-tangible-voice",
+  "name": "layer0-next-auth-ioredis-example",
   "scripts": {
     "layer0:dev": "layer0 dev",
     "layer0:build": "layer0 build",
@@ -17,7 +17,7 @@
     "cors": "^2.8.5",
     "dayjs": "^1.11.3",
     "ioredis": "^4.23.0",
-    "next": "^11.1.3",
+    "next": "12.2.0",
     "next-auth": "^4.8.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"

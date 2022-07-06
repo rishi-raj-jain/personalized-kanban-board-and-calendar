@@ -2,7 +2,7 @@
 // You should commit this file to source control.
 // Learn more about this file at https://docs.layer0.co/guides/layer0_config
 module.exports = {
-  connector: '@layer0/next',
+  connector: './layer0',
 
   // The name of the site in Layer0 to which this app should be deployed.
   // name: 'my-site-name',
