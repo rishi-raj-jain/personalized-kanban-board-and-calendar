@@ -36,3 +36,4 @@ yarn-error.log*
 .layer0
 
 .env
+.swc
