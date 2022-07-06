@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: optional;
+  src: url(/fonts/inter-var.woff2) format('woff2');
+}
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.text-input {
+  border-radius: 5px;
+  border: 0.5px solid white;
+}
+.text-input input[type='text'] {
+  color: white;
+}
+.text-input input[type='date'] {
+  color: white;
+}
+.text-input input[type='time'] {
+  color: white;
+}
+.text-input ::-webkit-input-placeholder {
+  color: white;
+}
+.text-input :-ms-input-placeholder {
+  color: white;
+}
+.text-input ::placeholder {
+  color: white;
+}
+.text-input input[type='text']:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: white;
+}
+.text-input input[type='date']:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: white;
+}
+.text-input input[type='time']:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: white;
+}
+.text-input input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+.text-input input[type='time']::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+.text-select {
+  color: white;
+  box-shadow: none !important;
+  border: 1px solid white !important;
+  background-color: transparent !important;
+}
+.text-select span {
+  color: white;
+}
