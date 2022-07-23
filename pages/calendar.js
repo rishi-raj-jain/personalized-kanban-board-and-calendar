@@ -9,7 +9,7 @@ import ArrowLeftIcon from '@heroicons/react/outline/ArrowLeftIcon'
 import ArrowRightIcon from '@heroicons/react/outline/ArrowRightIcon'
 
 const Page = ({ selectedCategories = [] }) => {
-  const router= useRouter()
+  const router = useRouter()
   const [_, setToast] = useToasts()
   const [cards, setCards] = useState([])
   const [deepCards, setDeepCards] = useState([])
