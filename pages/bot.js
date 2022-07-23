@@ -57,7 +57,7 @@ const Dictaphone = () => {
               if (res.hasOwnProperty('Cards')) {
                 res['Cards'].forEach((i, _ind) => {
                   let date = new Date(`${i.date} ${i.time}`)
-                  speak({ text: `Task ${_ind}: ${i.title || 'No Title'} due on ${date.getDate()} ${month[date.getMonth()]}, ${date.getFullYear()}` })
+                  speak({ text: `Task ${_ind+1}: ${i.title || 'No Title'} due on ${date.getDate()} ${month[date.getMonth()]}, ${date.getFullYear()}` })
                 })
                 setMessage('Total Number of Tasks are:', res['Cards'].length)
               } else {
