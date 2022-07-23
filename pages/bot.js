@@ -31,6 +31,7 @@ const Dictaphone = () => {
             .then((res) => res.json())
             .then((res) => {
               if (res.hasOwnProperty('Cards')) {
+                speak({ text: `You have ${res['Cards'].length} tasks due today.` })
                 setMessage('Total Number of Tasks are:', res['Cards'].length)
               } else {
                 setMessage('Failed to load all your tasks.')
@@ -70,8 +71,6 @@ const Dictaphone = () => {
             })
         }
       },
-      isFuzzyMatch: true,
-      fuzzyMatchingThreshold: 0.2,
     },
     {
       command: 'clear',
