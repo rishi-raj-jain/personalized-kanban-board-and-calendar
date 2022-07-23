@@ -45,8 +45,6 @@ const Dictaphone = () => {
           setMessage('You need to log in to view tasks.')
         }
       },
-      isFuzzyMatch: true,
-      fuzzyMatchingThreshold: 0.2,
     },
     {
       command: 'Tell all my tasks due today',
