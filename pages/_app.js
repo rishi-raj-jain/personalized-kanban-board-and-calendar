@@ -78,6 +78,12 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }) => {
                 <span className="text-white">Calendar</span>
               </a>
             </Link>
+            <Link href="/bot">
+              <a className={classNames('mt-8 flex flex-row space-x-5 px-5', { 'font-bold': sidebar === 2 }, { 'font-light': sidebar !== 2 })}>
+                <img loading="lazy" className="h-6 w-6 text-white" src="/icons/voice.svg" />
+                <span className="text-white">Voice Assistant</span>
+              </a>
+            </Link>
             {sidebar === 2 && (
               <div className="flex flex-col">
                 <span className="mt-10 px-5 text-lg text-white">Filter By</span>
