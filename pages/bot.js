@@ -1,15 +1,68 @@
-import { useState } from 'react'
 import { month } from '@/lib/helper'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useToasts } from '@geist-ui/react'
 import { useSession } from 'next-auth/react'
 import { useSpeechSynthesis } from 'react-speech-kit'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 
 const Dictaphone = () => {
   const router = useRouter()
+  const [_, setToast] = useToasts()
   const { speak } = useSpeechSynthesis()
   const [message, setMessage] = useState('')
   const { data: userData, status } = useSession()
+  const [cards, setCards] = useState([])
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      setToast({
+        delay: 1000,
+        type: 'success',
+        text: 'You are now logged in.',
+      })
+      fetch(`/api/acitivity?userEmail=${userData.user.email}`)
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.hasOwnProperty('Cards')) {
+            setCards(res['Cards'])
+            setToast({
+              type: 'success',
+              text: 'Your activities are ready to view.',
+            })
+          } else {
+            setToast({
+              type: 'secondary',
+              text: res['message'] || 'No cards found.',
+            })
+          }
+        })
+        .catch((e) => {
+          setToast({
+            type: 'error',
+            text: e,
+          })
+        })
+    } else {
+      setToast({
+        delay: 5000,
+        type: 'error',
+        text: (
+          <div className="flex flex-row items-center space-x-2">
+            <span>{'You need to be authenticated.'}</span>
+            <button
+              className="rounded border p-2"
+              onClick={(e) => {
+                router.push('/api/auth/signin')
+              }}
+            >
+              Sign In
+            </button>
+          </div>
+        ),
+      })
+    }
+  }, [status])
 
   const commands = [
     {
@@ -48,6 +101,49 @@ const Dictaphone = () => {
         } else {
           console.log(e)
           setMessage('You need to log in to view tasks.')
+        }
+      },
+    },
+    {
+      command: 'Any updates',
+      callback: () => {
+        if (status === 'authenticated') {
+          fetch(`/api/acitivity?userEmail=${userData.user.email}`)
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.hasOwnProperty('Cards')) {
+
+                let cardDict = { 'remainingTasks': [] }
+                cards.forEach((i) => {
+                  cardDict[i.createdAt] = 1
+                })
+
+                let newSetCards = res['Cards']
+                newSetCards.forEach((i) => {
+                  if (cardDict.hasOwnProperty(i.createdAt)) {
+                    delete cardDict[i.createdAt]
+                  }
+                  else {
+                    cardDict.remainingTasks.push(i)
+                  }
+                })
+
+                speak({ text: `You have received ${cardDict['remainingTasks'].length} more task${cardDict['remainingTasks'].length > 1 ? 's' : ''} due today.` })
+
+                if (cardDict['remainingTasks'].length > 0) {
+                  speak({ text: `Let's go over each of them.` })
+                  cardDict['remainingTasks'].forEach((i, _ind) => {
+                    let date = new Date(`${i.date} ${i.time}`)
+                    speak({ text: `Task ${_ind + 1}: ${i.title || 'No Title'} due on ${date.getDate()} ${month[date.getMonth()]}, ${date.getFullYear()}` })
+                  })
+                }
+              } else {
+                setMessage('Failed to load all your tasks.')
+              }
+            })
+            .catch((e) => {
+              setMessage('Failed to load all your tasks.')
+            })
         }
       },
     },
