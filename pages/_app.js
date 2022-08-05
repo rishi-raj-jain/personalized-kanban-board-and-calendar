@@ -28,6 +28,8 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }) => {
         setSideBar(1)
       } else if (url.includes('/calendar')) {
         setSideBar(2)
+      } else if (url.includes('/bot')) {
+        setSideBar(3)
       } else {
         setSideBar(0)
       }
@@ -79,7 +81,7 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }) => {
               </a>
             </Link>
             <Link href="/bot">
-              <a className={classNames('mt-8 flex flex-row space-x-5 px-5', { 'font-bold': sidebar === 2 }, { 'font-light': sidebar !== 2 })}>
+              <a className={classNames('mt-8 flex flex-row space-x-5 px-5', { 'font-bold': sidebar === 3 }, { 'font-light': sidebar !== 3 })}>
                 <img loading="lazy" className="h-6 w-6 text-white" src="/icons/voice.svg" />
                 <span className="text-white">Voice Assistant</span>
               </a>
