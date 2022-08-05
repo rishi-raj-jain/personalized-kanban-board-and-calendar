@@ -105,6 +105,23 @@ const Dictaphone = () => {
       },
     },
     {
+      command: 'Tell my meeting schedule',
+      callback: () => {
+        let meetingsCard = cards.filter(i => i.category === 'Meetings')
+        if (meetingsCard.length > 0) {
+          speak({ text: `Let's go over each of them.` })
+          speak({ text: `You have received ${meetingsCard.length} more meeting${meetingsCard.length > 1 ? 's' : ''} due today.` })
+          meetingsCard.forEach((i) => {
+            let date = new Date(`${i.date} ${i.time}`)
+            speak({ text: `You've a meeting at ${date.getDate()} ${month[date.getMonth()]}, ${date.getFullYear()}` })
+          })
+        }
+        else {
+          speak({ text: `You have no meetings scheduled.` })
+        }
+      }
+    },
+    {
       command: 'Any updates',
       callback: () => {
         if (status === 'authenticated') {
