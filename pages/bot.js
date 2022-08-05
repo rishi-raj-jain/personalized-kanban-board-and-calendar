@@ -105,6 +105,33 @@ const Dictaphone = () => {
       },
     },
     {
+      command: 'create a todo',
+      callback: () => {
+        router.push({
+          pathname: '/task/create',
+          query: { category: 'To Do' }
+        })
+      }
+    },
+    {
+      command: 'create a meeting',
+      callback: () => {
+        router.push({
+          pathname: '/task/create',
+          query: { category: 'Meetings' }
+        })
+      }
+    },
+    {
+      command: 'create a deadline',
+      callback: () => {
+        router.push({
+          pathname: '/task/create',
+          query: { category: 'Deadlines' }
+        })
+      }
+    },
+    {
       command: 'Tell my meeting schedule',
       callback: () => {
         let meetingsCard = cards.filter(i => i.category === 'Meetings')
