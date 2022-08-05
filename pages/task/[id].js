@@ -127,6 +127,9 @@ const Page = () => {
                       type: 'success',
                       text: `Succesfully ${temp['createdAt'] ? 'updated.' : 'created.'}`,
                     })
+                    if (!temp['createdAt']) {
+                      router.push(`/tasks`)
+                    }
                   })
                   .catch((e) => {
                     setToast({
