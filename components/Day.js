@@ -15,7 +15,7 @@ export default function Day({ day, rowIdx, filteredEvents }) {
     return day.format('DD-MM-YY') === dayjs().format('DD-MM-YY') ? 'bg-cyan-600 px-2 py-1 text-white rounded-full' : ''
   }
   return (
-    <div className="flex flex-col items-center border border-[#a0a0a040] shadow-lg">
+    <div className="flex flex-col items-center border border-[#a0a0a040] shadow-lg overflow-y-scroll">
       <header className="flex flex-col items-center gap-y-2">
         <span className="mt-3 text-sm font-bold text-white">{day.format('ddd')}</span>
         <span className={`text-center text-sm text-gray-200 ${getCurrentDayClass()}`}>
