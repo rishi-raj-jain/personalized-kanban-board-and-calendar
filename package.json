@@ -1,5 +1,5 @@
 {
-  "name": "edgio-next-auth-ioredis-example",
+  "name": "elaichi",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

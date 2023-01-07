@@ -10,8 +10,9 @@ pages.forEach((i) => {
     cache({ edge: { maxAgeSeconds: 60 * 60 * 24 * 365 } })
   })
 })
-    router.fallback(({ renderWithApp }) => {
-    renderWithApp()
-  })
 
-  export default router
+router.fallback(({ renderWithApp }) => {
+  renderWithApp()
+})
+
+export default router
