@@ -1,21 +1,14 @@
 const { join } = require('path')
-const { exit } = require('process')
-const { DeploymentBuilder } = require('@layer0/core/deploy')
+const { DeploymentBuilder } = require('@edgio/core/deploy')
 
 const appDir = process.cwd()
 const builder = new DeploymentBuilder(appDir)
 
-module.exports = async function build(options) {
-  try {
+module.exports = async function build({}) {
     builder.clearPreviousBuildOutput()
-    let command = 'npm run build'
-    await builder.exec(command)
+    await builder.exec('npm run build')
     builder.addJSAsset(join(appDir, '.next', 'standalone'), 'dist')
     builder.addJSAsset(join(appDir, '.next', 'static'), join('dist', '.next', 'static'))
     builder.addJSAsset(join(appDir, 'public'), join('dist', 'public'))
     await builder.build()
-  } catch (e) {
-    console.log(e)
-    exit()
-  }
 }

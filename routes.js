@@ -1,24 +1,17 @@
-// This file was automatically added by layer0 deploy.
-// You should commit this file to source control.
-const { Router } = require('@layer0/core/router')
+const { Router } = require('@edgio/core/router')
 
-module.exports = new Router()
-  // All pages can be cached as all of them would be client side rendered
-  .match('/fonts/:path*', ({ cache }) => {
+// All pages can be cached as all of them would be client side rendered
+const pages = ['/fonts/:path*', '/icons/:path*', '/tasks', '/task/:path*', 'calendar']
+
+const router = new Router()
+
+pages.forEach((i) => {
+  router.match(i, ({ cache }) => {
     cache({ edge: { maxAgeSeconds: 60 * 60 * 24 * 365 } })
   })
-  .match('/icons/:path*', ({ cache }) => {
-    cache({ edge: { maxAgeSeconds: 60 * 60 * 24 * 365 } })
-  })
-  .match('/tasks', ({ cache }) => {
-    cache({ edge: { maxAgeSeconds: 60 * 60 * 24 * 365 } })
-  })
-  .match('/task/:path', ({ cache }) => {
-    cache({ edge: { maxAgeSeconds: 60 * 60 * 24 * 365 } })
-  })
-  .match('/calendar', ({ cache }) => {
-    cache({ edge: { maxAgeSeconds: 60 * 60 * 24 * 365 } })
-  })
-  .fallback(({ renderWithApp }) => {
+})
+    router.fallback(({ renderWithApp }) => {
     renderWithApp()
   })
+
+  export default router

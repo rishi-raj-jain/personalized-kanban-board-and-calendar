@@ -1,11 +1,8 @@
-// This file was automatically added by layer0 init.
-// You should commit this file to source control.
-
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const _preLayer0Export = withBundleAnalyzer({
+module.exports = withBundleAnalyzer({
   output: 'standalone',
   async rewrites() {
     return [
@@ -25,5 +22,3 @@ const _preLayer0Export = withBundleAnalyzer({
     ]
   },
 })
-
-module.exports = _preLayer0Export
